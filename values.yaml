@@ -42,6 +42,14 @@ application:
 # This is to set up and define the application deployment
 #
 deployment:
+  # Pod replica count. Rendered UNCONDITIONALLY into the Deployment so a
+  # `kubectl scale` shows up as ArgoCD drift instead of an untracked field
+  # (kanban t_d89cdac0). The template defaults to 1 when unset; an explicit
+  # value (including 0, scale-to-zero) is rendered as given. Deliberately NOT
+  # defaulted here: prepareValues() merges with sprig `merge`, and mergo
+  # overwrites a zero dst value with a non-zero default — which would make an
+  # explicit 0 inexpressible.
+  # replicas: 1
   strategy: {}
   podAnnotations: {}
   podLabels: {}

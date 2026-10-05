@@ -56,6 +56,11 @@
           "type": ["object", "null"],
           "description": "Deployment strategy. Defaults to `{type: Recreate}` when empty."
         },
+        "replicas": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "description": "Pod replica count. Rendered unconditionally (default 1) so a scale is tracked by ArgoCD."
+        },
         "podAnnotations": { "type": ["object", "null"] },
         "podLabels": { "type": ["object", "null"] },
         "podSecurityContext": { "type": ["object", "null"] },

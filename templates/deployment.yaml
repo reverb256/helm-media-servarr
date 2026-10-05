@@ -15,6 +15,12 @@ metadata:
   labels:
     {{- include "media-servarr-base.labels" . | nindent 4 }}
 spec:
+  {{- $replicas := .Values.deployment.replicas }}
+  {{- if ne $replicas nil }}
+  replicas: {{ $replicas }}
+  {{- else }}
+  replicas: 1
+  {{- end }}
   selector:
     matchLabels:
       {{- include "media-servarr-base.selectorLabels" . | nindent 6 }}

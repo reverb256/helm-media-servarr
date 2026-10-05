@@ -1,8 +1,8 @@
-# Exercises the optional feature branches of the base chart's templates:
+# Exercise the optional feature branches of the base chart's templates:
 # metrics/ServiceMonitor, ingress with TLS, an external-secret ref, service
-# account creation, init containers, sidecars, resource limits, and host
-# networking. A regression in any of these would render invalid Kubernetes
-# manifests and fail lint-manifests.
+# account creation, init containers, sidecars, resource limits, replica count,
+# and host networking. A regression in any of these would render invalid
+# Kubernetes manifests and fail lint-manifests.
 
 secrets:
   - name: 'apiKey'
@@ -28,6 +28,9 @@ metrics:
     number: 9704
 
 deployment:
+  # Non-default replica count: proves the field is rendered (a value that
+  # renders nothing is exactly the failure this fleet keeps repeating).
+  replicas: 2
   podSecurityContext:
     fsGroup: 2000
   container:
